@@ -1,6 +1,8 @@
-import { ROOMS, fmtVND } from "@/lib/rooms";
+import { getRooms, fmtVND, type Room } from "@/lib/rooms";
 import BookingForm from "@/components/BookingForm";
 import "./page.css";
+
+export const revalidate = 3600;
 
 const THUMB_BG: Record<string, string> = {
   Deluxe: "#e8f0ec",
@@ -9,7 +11,8 @@ const THUMB_BG: Record<string, string> = {
   Single: "#f4f4f4",
 };
 
-export default function Home() {
+export default async function Home() {
+  const rooms = await getRooms();
   return (
     <main className="ld-root">
       {/* NAV */}
@@ -70,7 +73,7 @@ export default function Home() {
           </p>
         </div>
         <div className="ld-rooms-grid">
-          {ROOMS.map((r) => (
+          {rooms.map((r: Room) => (
             <div className="ld-room-card" key={r.id}>
               <div className="ld-room-thumb" style={{ background: THUMB_BG[r.type] }}>
                 <span style={{ fontSize: 40 }}>{r.emoji}</span>
@@ -145,7 +148,7 @@ export default function Home() {
         <p className="ld-section-sub">
           Fill in the form and we&apos;ll confirm within a few hours via Zalo or phone.
         </p>
-        <BookingForm />
+        <BookingForm rooms={rooms} />
       </section>
 
       {/* CONTACT */}

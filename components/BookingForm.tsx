@@ -1,11 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { ROOMS, fmtVND } from "@/lib/rooms";
+import { fmtVND, type Room } from "@/lib/rooms";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-export default function BookingForm() {
+interface BookingFormProps {
+  rooms: Room[];
+}
+
+export default function BookingForm({ rooms }: BookingFormProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [form, setForm] = useState({
@@ -121,7 +125,7 @@ export default function BookingForm() {
             onChange={(e) => update("room_id", e.target.value)}
           >
             <option value="">Select a room</option>
-            {ROOMS.map((r) => (
+            {rooms.map((r) => (
               <option key={r.id} value={r.id}>
                 {r.name} — {fmtVND(r.price)}đ/đêm
               </option>

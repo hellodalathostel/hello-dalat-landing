@@ -1,3 +1,5 @@
+import { createClient } from "@supabase/supabase-js";
+
 // Dữ liệu phòng — đồng bộ với public.rooms (snapshot 2026-06).
 // Giá hiển thị là base_price; giá thực tế confirm thủ công qua Zalo.
 export interface Room {
@@ -29,4 +31,48 @@ export const VALID_ROOM_IDS = ROOMS.map((r) => r.id);
 
 export function fmtVND(n: number): string {
   return new Intl.NumberFormat("vi-VN").format(n);
+}
+
+// Emoji map để mapType trả về đúng emoji theo type DB
+const ROOM_EMOJI_BY_DB_TYPE: Record<string, string> = {
+  family:          "🛏️",
+  deluxe_queen:    "👑",
+  deluxe_double:   "🌿",
+  standard_double: "🏔️",
+  single:          "☁️",
+};
+
+function mapDbTypeToRoomType(dbType: string): Room["type"] {
+  if (dbType === "family")            return "Family";
+  if (dbType.startsWith("deluxe"))    return "Deluxe";
+  if (dbType.startsWith("standard"))  return "Standard";
+  return "Single";
+}
+
+// Fetch giá phòng từ Supabase — dùng trong Server Component
+// Revalidate qua Next.js fetch cache, không dùng trực tiếp ở đâu khác
+export async function getRooms(): Promise<Room[]> {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  );
+  const { data, error } = await supabase
+    .from("rooms")
+    .select("id, name, type, capacity, base_price")
+    .eq("is_active", true)
+    .order("id");
+
+  if (error || !data) {
+    // Fallback về ROOMS tĩnh nếu DB lỗi
+    return ROOMS;
+  }
+
+  return data.map((r) => ({
+    id: r.id,
+    name: r.name,
+    type: mapDbTypeToRoomType(r.type),
+    capacity: r.capacity,
+    price: r.base_price,
+    emoji: ROOM_EMOJI_BY_DB_TYPE[r.type] ?? "🛏️",
+  }));
 }
