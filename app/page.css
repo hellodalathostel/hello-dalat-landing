@@ -1,0 +1,525 @@
+/* ===== NAV ===== */
+.ld-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(247, 243, 237, 0.92);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+}
+.ld-nav-logo {
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--pine);
+  letter-spacing: 0.3px;
+}
+.ld-nav-logo span {
+  color: var(--gold);
+}
+.ld-nav-links {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+.ld-nav-links a {
+  font-size: 13px;
+  color: #555;
+  letter-spacing: 0.4px;
+  transition: color 0.2s;
+}
+.ld-nav-links a:hover {
+  color: var(--pine);
+}
+.ld-btn-book {
+  background: var(--pine);
+  color: var(--cream) !important;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.ld-btn-book:hover {
+  background: var(--pine-dark);
+}
+
+/* ===== HERO ===== */
+.ld-hero {
+  position: relative;
+  min-height: 540px;
+  background: linear-gradient(160deg, #2d4a3e 0%, #1a2e26 55%, #3a5c4c 100%);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+.ld-hero-mist {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 120% 60% at 60% 80%, rgba(200, 169, 110, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 50% at 20% 30%, rgba(255, 255, 255, 0.04) 0%, transparent 60%);
+}
+.ld-hero-lines {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 40px,
+    rgba(255, 255, 255, 1) 40px,
+    rgba(255, 255, 255, 1) 41px
+  );
+}
+.ld-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 80px 40px 52px;
+  max-width: 600px;
+}
+.ld-hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.ld-hero-title {
+  font-family: "Playfair Display", serif;
+  font-size: 48px;
+  line-height: 1.1;
+  color: var(--cream);
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+.ld-hero-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+.ld-hero-sub {
+  font-size: 15px;
+  color: rgba(247, 243, 237, 0.65);
+  line-height: 1.6;
+  margin-bottom: 28px;
+  font-weight: 300;
+}
+.ld-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold);
+  color: var(--pine-dark);
+  padding: 14px 28px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.ld-hero-cta:hover {
+  background: var(--gold-hover);
+}
+.ld-hero-badges {
+  position: absolute;
+  right: 40px;
+  bottom: 52px;
+  z-index: 2;
+  display: flex;
+  gap: 12px;
+}
+.ld-badge {
+  background: rgba(247, 243, 237, 0.1);
+  border: 0.5px solid rgba(247, 243, 237, 0.2);
+  border-radius: 4px;
+  padding: 10px 16px;
+  text-align: center;
+}
+.ld-badge-num {
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  color: var(--gold);
+  display: block;
+}
+.ld-badge-label {
+  font-size: 11px;
+  color: rgba(247, 243, 237, 0.55);
+  letter-spacing: 0.5px;
+}
+
+/* ===== SECTION ===== */
+.ld-section {
+  padding: 64px 32px;
+}
+.ld-section-eyebrow {
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.ld-section-title {
+  font-family: "Playfair Display", serif;
+  font-size: 32px;
+  color: var(--pine);
+  font-weight: 400;
+  margin-bottom: 8px;
+  line-height: 1.15;
+}
+.ld-section-sub {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ===== ROOMS ===== */
+.ld-rooms-bg {
+  background: #fff;
+}
+.ld-rooms-header {
+  max-width: 480px;
+  margin-bottom: 40px;
+}
+.ld-rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+.ld-room-card {
+  border: 0.5px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.ld-room-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(45, 74, 62, 0.08);
+}
+.ld-room-thumb {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ld-room-body {
+  padding: 16px;
+}
+.ld-room-type {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #888;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.ld-room-name {
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  color: var(--pine);
+  margin-bottom: 8px;
+}
+.ld-room-meta {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.ld-room-meta-item {
+  font-size: 12px;
+  color: #888;
+}
+.ld-room-price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.ld-room-price {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--pine);
+}
+.ld-room-price-unit {
+  font-size: 12px;
+  color: #888;
+  font-weight: 400;
+}
+.ld-room-book-btn {
+  background: transparent;
+  border: 0.5px solid var(--pine);
+  color: var(--pine);
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.ld-room-book-btn:hover {
+  background: var(--pine);
+  color: #fff;
+}
+
+/* ===== WHY US ===== */
+.ld-why {
+  background: var(--cream);
+}
+.ld-why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+.ld-why-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  background: rgba(45, 74, 62, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+.ld-why-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--pine);
+  margin-bottom: 6px;
+}
+.ld-why-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ===== BOOKING ===== */
+.ld-booking {
+  background: var(--pine);
+}
+.ld-booking .ld-section-eyebrow {
+  color: var(--gold);
+}
+.ld-booking .ld-section-title {
+  color: var(--cream);
+}
+.ld-booking .ld-section-sub {
+  color: rgba(247, 243, 237, 0.6);
+}
+
+/* ===== BOOKING FORM (component) ===== */
+.bf-form {
+  margin-top: 36px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 0.5px solid rgba(247, 243, 237, 0.15);
+  border-radius: 8px;
+  padding: 28px;
+  max-width: 680px;
+}
+.bf-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.bf-full {
+  grid-column: 1 / -1;
+}
+.bf-label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: rgba(247, 243, 237, 0.7);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.bf-input {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 0.5px solid rgba(247, 243, 237, 0.2);
+  border-radius: 4px;
+  color: var(--cream);
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.bf-input::placeholder {
+  color: rgba(247, 243, 237, 0.3);
+}
+.bf-input:focus {
+  border-color: var(--gold);
+}
+.bf-select option {
+  background: var(--pine);
+  color: var(--cream);
+}
+.bf-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+.bf-submit {
+  width: 100%;
+  padding: 14px;
+  background: var(--gold);
+  color: var(--pine-dark);
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 8px;
+  font-family: "Inter", sans-serif;
+}
+.bf-submit:hover:not(:disabled) {
+  background: var(--gold-hover);
+}
+.bf-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.bf-note {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(247, 243, 237, 0.4);
+  margin-top: 12px;
+}
+.bf-error {
+  background: rgba(226, 75, 74, 0.15);
+  border: 0.5px solid rgba(226, 75, 74, 0.4);
+  color: #f0a0a0;
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+.bf-success {
+  margin-top: 36px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 0.5px solid rgba(247, 243, 237, 0.15);
+  border-radius: 8px;
+  padding: 48px 28px;
+  max-width: 680px;
+  text-align: center;
+}
+.bf-success-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+  color: var(--gold);
+}
+.bf-success-title {
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+.bf-success-sub {
+  font-size: 14px;
+  color: rgba(247, 243, 237, 0.6);
+  line-height: 1.6;
+}
+
+/* ===== CONTACT ===== */
+.ld-contact {
+  background: var(--pine-dark);
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.ld-contact-info {
+  font-size: 13px;
+  color: rgba(247, 243, 237, 0.6);
+  line-height: 1.7;
+}
+.ld-contact-info strong {
+  color: var(--gold);
+}
+.ld-contact-links {
+  display: flex;
+  gap: 12px;
+}
+.ld-contact-link {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 0.5px solid rgba(247, 243, 237, 0.2);
+  color: rgba(247, 243, 237, 0.8);
+  transition: all 0.2s;
+}
+.ld-contact-link:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.ld-contact-link.zalo {
+  background: rgba(0, 110, 255, 0.15);
+  border-color: rgba(0, 110, 255, 0.3);
+  color: #7ab5ff;
+}
+
+/* ===== FOOTER ===== */
+.ld-footer {
+  background: var(--pine-darker);
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.ld-footer-logo {
+  font-family: "Playfair Display", serif;
+  font-size: 15px;
+  color: rgba(247, 243, 237, 0.5);
+}
+.ld-footer-logo span {
+  color: var(--gold);
+}
+.ld-footer-addr {
+  font-size: 12px;
+  color: rgba(247, 243, 237, 0.3);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  .ld-nav {
+    padding: 12px 20px;
+  }
+  .ld-nav-links {
+    gap: 16px;
+  }
+  .ld-hero-content {
+    padding: 60px 20px 40px;
+  }
+  .ld-hero-title {
+    font-size: 34px;
+  }
+  .ld-hero-badges {
+    right: 20px;
+    bottom: 20px;
+  }
+  .ld-section {
+    padding: 48px 20px;
+  }
+  .ld-section-title {
+    font-size: 26px;
+  }
+  .bf-form,
+  .bf-success {
+    padding: 20px;
+  }
+  .bf-grid {
+    grid-template-columns: 1fr;
+  }
+  .ld-contact,
+  .ld-footer {
+    padding: 20px;
+  }
+}
