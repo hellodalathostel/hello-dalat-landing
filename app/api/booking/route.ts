@@ -98,8 +98,8 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Notify chạy nền — không await chặn response của khách.
-  notifyTelegram(d);
+  // Await notify trước khi return — tránh serverless tắt sớm.
+  await notifyTelegram(d);
 
   return NextResponse.json({ ok: true });
 }
