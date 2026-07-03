@@ -12,7 +12,7 @@
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
 }
 .ld-nav-logo {
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-heading), serif;
   font-size: 18px;
   font-weight: 600;
   color: var(--pine);
@@ -89,7 +89,7 @@
   margin-bottom: 16px;
 }
 .ld-hero-title {
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-heading), serif;
   font-size: 48px;
   line-height: 1.1;
   color: var(--cream);
@@ -138,7 +138,7 @@
   text-align: center;
 }
 .ld-badge-num {
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-heading), serif;
   font-size: 20px;
   color: var(--gold);
   display: block;
@@ -162,7 +162,7 @@
   margin-bottom: 10px;
 }
 .ld-section-title {
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-heading), serif;
   font-size: 32px;
   color: var(--pine);
   font-weight: 400;
@@ -217,7 +217,7 @@
   margin-bottom: 4px;
 }
 .ld-room-name {
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-heading), serif;
   font-size: 18px;
   color: var(--pine);
   margin-bottom: 8px;
@@ -343,7 +343,7 @@
   border-radius: 4px;
   color: var(--cream);
   font-size: 14px;
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body), sans-serif;
   outline: none;
   transition: border-color 0.2s;
 }
@@ -373,7 +373,7 @@
   cursor: pointer;
   transition: background 0.2s;
   margin-top: 8px;
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body), sans-serif;
 }
 .bf-submit:hover:not(:disabled) {
   background: var(--gold-hover);
@@ -412,7 +412,7 @@
   color: var(--gold);
 }
 .bf-success-title {
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-heading), serif;
   font-size: 22px;
   color: var(--cream);
   margin-bottom: 8px;
@@ -475,7 +475,7 @@
   gap: 12px;
 }
 .ld-footer-logo {
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-heading), serif;
   font-size: 15px;
   color: rgba(247, 243, 237, 0.5);
 }

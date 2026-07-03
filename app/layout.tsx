@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { fraunces, inter } from "./fonts";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hellodalathostel.com"),
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="vi" className={`${fraunces.variable} ${inter.variable}`}>
       <body>{children}</body>
     </html>
   );
