@@ -20,6 +20,7 @@ export default function BookingForm({ rooms }: BookingFormProps) {
     check_in: "",
     check_out: "",
     note: "",
+    website: "", // honeypot — người thật không bao giờ thấy/điền field này
   });
 
   const today = new Date().toISOString().split("T")[0];
@@ -28,14 +29,14 @@ export default function BookingForm({ rooms }: BookingFormProps) {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
-  // Validation client-side cho UX nhanh — server vẫn validate lại bằng Zod.
+  // Client-side validation cho UX nhanh — server vẫn validate lại bằng Zod.
   function validate(): string | null {
-    if (form.name.trim().length < 2) return "Vui lòng nhập họ tên";
-    if (form.phone.trim().length < 8) return "Vui lòng nhập số điện thoại hợp lệ";
-    if (!form.room_id) return "Vui lòng chọn phòng";
-    if (!form.check_in) return "Vui lòng chọn ngày nhận phòng";
-    if (!form.check_out) return "Vui lòng chọn ngày trả phòng";
-    if (form.check_out <= form.check_in) return "Ngày trả phòng phải sau ngày nhận phòng";
+    if (form.name.trim().length < 2) return "Please enter your full name";
+    if (form.phone.trim().length < 8) return "Please enter a valid phone number";
+    if (!form.room_id) return "Please select a room";
+    if (!form.check_in) return "Please pick a check-in date";
+    if (!form.check_out) return "Please pick a check-out date";
+    if (form.check_out <= form.check_in) return "Check-out must be after check-in";
     return null;
   }
 
@@ -59,13 +60,13 @@ export default function BookingForm({ rooms }: BookingFormProps) {
       const data = await res.json();
 
       if (!res.ok || !data.ok) {
-        setErrorMsg(data.error ?? "Có lỗi xảy ra. Vui lòng thử lại.");
+        setErrorMsg(data.error ?? "Something went wrong. Please try again.");
         setStatus("error");
         return;
       }
       setStatus("success");
     } catch {
-      setErrorMsg("Không thể kết nối. Vui lòng gọi 0969 975 935.");
+      setErrorMsg("Connection failed. Please call or message us at +84 969 975 935.");
       setStatus("error");
     }
   }
@@ -92,17 +93,19 @@ export default function BookingForm({ rooms }: BookingFormProps) {
           <input
             className="bf-input"
             type="text"
-            placeholder="Nguyen Van A"
+            placeholder="Your name"
+            autoComplete="name"
             value={form.name}
             onChange={(e) => update("name", e.target.value)}
           />
         </div>
         <div>
-          <label className="bf-label">Phone / Zalo *</label>
+          <label className="bf-label">Phone / WhatsApp / Zalo *</label>
           <input
             className="bf-input"
             type="tel"
-            placeholder="0912 345 678"
+            placeholder="+84 912 345 678"
+            autoComplete="tel"
             value={form.phone}
             onChange={(e) => update("phone", e.target.value)}
           />
@@ -113,6 +116,7 @@ export default function BookingForm({ rooms }: BookingFormProps) {
             className="bf-input"
             type="email"
             placeholder="optional"
+            autoComplete="email"
             value={form.email}
             onChange={(e) => update("email", e.target.value)}
           />
@@ -127,7 +131,7 @@ export default function BookingForm({ rooms }: BookingFormProps) {
             <option value="">Select a room</option>
             {rooms.map((r) => (
               <option key={r.id} value={r.id}>
-                {r.name} — {fmtVND(r.price)}đ/đêm
+                {r.name} — {fmtVND(r.price)}₫/night
               </option>
             ))}
           </select>
@@ -161,6 +165,19 @@ export default function BookingForm({ rooms }: BookingFormProps) {
             onChange={(e) => update("note", e.target.value)}
           />
         </div>
+      </div>
+
+      {/* Honeypot — ẩn khỏi người thật, bot auto-fill sẽ điền và bị drop ở server */}
+      <div className="bf-hp" aria-hidden="true">
+        <label htmlFor="bf-website">Website</label>
+        <input
+          id="bf-website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={form.website}
+          onChange={(e) => update("website", e.target.value)}
+        />
       </div>
 
       {status === "error" && <p className="bf-error">{errorMsg}</p>}

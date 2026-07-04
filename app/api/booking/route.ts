@@ -1,32 +1,72 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { supabase } from "@/lib/supabase";
-import { VALID_ROOM_IDS, ROOM_NAME, fmtVND } from "@/lib/rooms";
+import { VALID_ROOM_IDS, ROOM_NAME } from "@/lib/rooms";
 
-// Validation server-side — chống bypass client. Khớp schema booking_requests.
+// =====================================================================
+// RATE LIMIT — in-memory, $0, không cần Redis.
+// Caveat: serverless mỗi instance có Map riêng → limit là "per instance",
+// đủ để chặn spam bot thông thường. Nếu sau này cần chặt hơn: Upstash.
+// =====================================================================
+const RATE_WINDOW_MS = 10 * 60 * 1000; // 10 phút
+const RATE_MAX = 5; // tối đa 5 request / IP / 10 phút
+
+const hits = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
+  if (recent.length >= RATE_MAX) {
+    hits.set(ip, recent);
+    return true;
+  }
+  recent.push(now);
+  hits.set(ip, recent);
+  // Dọn map định kỳ để không phình bộ nhớ
+  if (hits.size > 1000) {
+    for (const [k, v] of hits) {
+      if (v.every((t) => now - t >= RATE_WINDOW_MS)) hits.delete(k);
+    }
+  }
+  return false;
+}
+
+function clientIp(req: NextRequest): string {
+  return req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+}
+
+// Hôm nay theo giờ Việt Nam — tránh lệch ngày do server chạy UTC.
+function todayVN(): string {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date());
+}
+
+// =====================================================================
+// VALIDATION — server-side, chống bypass client. Khớp schema
+// booking_requests. Error messages = English (guest-facing).
+// =====================================================================
 const bookingSchema = z
   .object({
-    name: z.string().trim().min(2, "Tên quá ngắn").max(100),
+    name: z.string().trim().min(2, "Name is too short").max(100),
     phone: z
       .string()
       .trim()
-      .min(8, "SĐT không hợp lệ")
+      .min(8, "Please enter a valid phone number")
       .max(20)
-      .regex(/^[0-9+\s().-]+$/, "SĐT chỉ chứa số và ký tự + - ( )"),
-    email: z.string().trim().email("Email không hợp lệ").max(150).optional().or(z.literal("")),
+      .regex(/^[0-9+\s().-]+$/, "Phone number can only contain digits and + - ( )"),
+    email: z.string().trim().email("Please enter a valid email").max(150).optional().or(z.literal("")),
     room_id: z.enum(VALID_ROOM_IDS as [string, ...string[]], {
-      errorMap: () => ({ message: "Phòng không hợp lệ" }),
+      errorMap: () => ({ message: "Please select a valid room" }),
     }),
-    check_in: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Ngày check-in không hợp lệ"),
-    check_out: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Ngày check-out không hợp lệ"),
+    check_in: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid check-in date"),
+    check_out: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid check-out date"),
     note: z.string().trim().max(1000).optional().or(z.literal("")),
   })
   .refine((d) => d.check_out > d.check_in, {
-    message: "Check-out phải sau check-in",
+    message: "Check-out must be after check-in",
     path: ["check_out"],
   })
-  .refine((d) => d.check_in >= new Date().toISOString().split("T")[0], {
-    message: "Check-in không thể ở quá khứ",
+  .refine((d) => d.check_in >= todayVN(), {
+    message: "Check-in date can't be in the past",
     path: ["check_in"],
   });
 
@@ -64,22 +104,37 @@ async function notifyTelegram(data: z.infer<typeof bookingSchema>) {
 }
 
 export async function POST(req: NextRequest) {
+  // 1) Rate limit theo IP
+  if (isRateLimited(clientIp(req))) {
+    return NextResponse.json(
+      { ok: false, error: "Too many requests. Please try again in a few minutes, or call +84 969 975 935." },
+      { status: 429 }
+    );
+  }
+
   let body: unknown;
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ ok: false, error: "Dữ liệu không hợp lệ" }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "Invalid request" }, { status: 400 });
   }
 
+  // 2) Honeypot — bot điền field ẩn "website" → trả ok giả, không insert,
+  //    không báo lỗi để bot không biết đường lách.
+  if (typeof body === "object" && body !== null && (body as Record<string, unknown>).website) {
+    return NextResponse.json({ ok: true });
+  }
+
+  // 3) Zod validate
   const parsed = bookingSchema.safeParse(body);
   if (!parsed.success) {
-    const firstError = parsed.error.errors[0]?.message ?? "Dữ liệu không hợp lệ";
+    const firstError = parsed.error.errors[0]?.message ?? "Invalid request";
     return NextResponse.json({ ok: false, error: firstError }, { status: 400 });
   }
 
   const d = parsed.data;
 
-  // INSERT vào staging table booking_requests (status mặc định 'pending' do DB).
+  // 4) INSERT vào staging table booking_requests (status mặc định 'pending' do DB).
   const { error } = await supabase.from("booking_requests").insert({
     name: d.name,
     phone: d.phone,
@@ -93,12 +148,12 @@ export async function POST(req: NextRequest) {
   if (error) {
     console.error("[booking] insert failed:", error);
     return NextResponse.json(
-      { ok: false, error: "Không thể gửi yêu cầu. Vui lòng gọi 0969 975 935." },
+      { ok: false, error: "We couldn't send your request. Please call +84 969 975 935." },
       { status: 500 }
     );
   }
 
-  // Await notify trước khi return — tránh serverless tắt sớm.
+  // 5) Await notify trước khi return — tránh serverless tắt sớm.
   await notifyTelegram(d);
 
   return NextResponse.json({ ok: true });

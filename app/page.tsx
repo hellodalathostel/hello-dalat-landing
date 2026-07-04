@@ -1,4 +1,15 @@
+import Image from "next/image";
 import { getRooms, fmtVND, type Room } from "@/lib/rooms";
+import {
+  HAS_PHOTOS,
+  HERO_IMAGE,
+  ROOM_IMAGES,
+  PROOF_ITEMS,
+  SHOW_TESTIMONIALS,
+  TESTIMONIALS,
+  TOURS,
+  FAQS,
+} from "@/lib/content";
 import BookingForm from "@/components/BookingForm";
 import "./page.css";
 
@@ -23,6 +34,7 @@ export default async function Home() {
         <div className="ld-nav-links">
           <a href="#rooms">Rooms</a>
           <a href="#about">About</a>
+          <a href="#faq">FAQ</a>
           <a href="#booking" className="ld-btn-book">
             Book now
           </a>
@@ -31,6 +43,16 @@ export default async function Home() {
 
       {/* HERO */}
       <section className="ld-hero">
+        {HAS_PHOTOS && (
+          <Image
+            src={HERO_IMAGE}
+            alt="Misty morning over Đà Lạt, seen from Hello Dalat Hostel"
+            fill
+            priority
+            sizes="100vw"
+            className="ld-hero-photo"
+          />
+        )}
         <div className="ld-hero-mist" />
         <div className="ld-hero-lines" />
         <div className="ld-hero-content">
@@ -62,6 +84,16 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* PROOF STRIP */}
+      <section className="ld-proof" aria-label="About Hello Dalat at a glance">
+        {PROOF_ITEMS.map((p) => (
+          <div className="ld-proof-item" key={p.label}>
+            <span className="ld-proof-num">{p.num}</span>
+            <span className="ld-proof-label">{p.label}</span>
+          </div>
+        ))}
+      </section>
+
       {/* ROOMS */}
       <section className="ld-section ld-rooms-bg" id="rooms">
         <div className="ld-rooms-header">
@@ -76,7 +108,17 @@ export default async function Home() {
           {rooms.map((r: Room) => (
             <div className="ld-room-card" key={r.id}>
               <div className="ld-room-thumb" style={{ background: THUMB_BG[r.type] }}>
-                <span style={{ fontSize: 40 }}>{r.emoji}</span>
+                {HAS_PHOTOS && ROOM_IMAGES[r.id] ? (
+                  <Image
+                    src={ROOM_IMAGES[r.id]}
+                    alt={`${r.name} at Hello Dalat Hostel`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                    className="ld-room-img"
+                  />
+                ) : (
+                  <span style={{ fontSize: 40 }}>{r.emoji}</span>
+                )}
               </div>
               <div className="ld-room-body">
                 <p className="ld-room-type">{r.type}</p>
@@ -89,7 +131,7 @@ export default async function Home() {
                 <div className="ld-room-price-row">
                   <div>
                     <span className="ld-room-price">{fmtVND(r.price)}</span>
-                    <span className="ld-room-price-unit"> đ / đêm</span>
+                    <span className="ld-room-price-unit"> ₫ / night</span>
                   </div>
                   <a href="#booking" className="ld-room-book-btn">
                     Book
@@ -141,6 +183,65 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* TESTIMONIALS — chỉ render khi đã thay review thật (lib/content.ts) */}
+      {SHOW_TESTIMONIALS && (
+        <section className="ld-section ld-testimonials" id="reviews">
+          <p className="ld-section-eyebrow">Guest words</p>
+          <h2 className="ld-section-title">What guests remember</h2>
+          <div className="ld-testi-grid">
+            {TESTIMONIALS.map((t) => (
+              <figure className="ld-testi-card" key={t.name + t.country}>
+                <div className="ld-testi-mark" aria-hidden="true">
+                  &ldquo;
+                </div>
+                <blockquote className="ld-testi-quote">{t.quote}</blockquote>
+                <figcaption className="ld-testi-who">
+                  {t.name} · {t.country}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+          <p className="ld-testi-source">From our guests on Booking.com</p>
+        </section>
+      )}
+
+      {/* TOURS */}
+      <section className="ld-section ld-tours" id="tours">
+        <p className="ld-section-eyebrow">Beyond the hostel</p>
+        <h2 className="ld-section-title">Đà Lạt, with people we trust</h2>
+        <p className="ld-section-sub">
+          We don&apos;t sell tours — we introduce you to local partners we&apos;ve worked with for
+          years, and help you plan at the desk.
+        </p>
+        <div className="ld-tours-grid">
+          {TOURS.map((t) => (
+            <div className="ld-tour-card" key={t.name}>
+              <div className="ld-tour-icon" aria-hidden="true">
+                {t.icon}
+              </div>
+              <div>
+                <p className="ld-tour-name">{t.name}</p>
+                <p className="ld-tour-desc">{t.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="ld-section ld-faq" id="faq">
+        <p className="ld-section-eyebrow">Good to know</p>
+        <h2 className="ld-section-title">Questions, answered</h2>
+        <div className="ld-faq-list">
+          {FAQS.map((f) => (
+            <details className="ld-faq-item" key={f.q}>
+              <summary className="ld-faq-q">{f.q}</summary>
+              <p className="ld-faq-a">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
       {/* BOOKING */}
       <section className="ld-section ld-booking" id="booking">
         <p className="ld-section-eyebrow">Direct booking</p>
@@ -156,13 +257,13 @@ export default async function Home() {
         <div className="ld-contact-info">
           <strong>Hello Dalat Hostel</strong> · 33/18/2 Phan Đình Phùng, Phường 1, Đà Lạt
           <br />
-          <span>📞 0969 975 935 · hellodalathostel@gmail.com</span>
+          <span>📞 +84 969 975 935 · hellodalathostel@gmail.com</span>
         </div>
         <div className="ld-contact-links">
           <a href="https://zalo.me/0969975935" className="ld-contact-link zalo">
             Zalo
           </a>
-          <a href="tel:0969975935" className="ld-contact-link">
+          <a href="tel:+84969975935" className="ld-contact-link">
             Call us
           </a>
         </div>

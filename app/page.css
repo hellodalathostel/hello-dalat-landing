@@ -523,3 +523,233 @@
     padding: 20px;
   }
 }
+
+/* ================================================================
+   ===== V2 ADDITIONS — proof strip, testimonials, tours, FAQ =====
+   ================================================================ */
+
+/* ===== HERO PHOTO (khi HAS_PHOTOS = true) ===== */
+.ld-hero-photo {
+  object-fit: cover;
+  z-index: 0;
+}
+.ld-hero-photo ~ .ld-hero-mist {
+  /* overlay tối để chữ cream đọc được trên ảnh */
+  background: linear-gradient(180deg, rgba(26, 46, 38, 0.35) 0%, rgba(26, 46, 38, 0.75) 100%);
+}
+.ld-hero-photo ~ .ld-hero-lines {
+  display: none;
+}
+
+/* ===== ROOM PHOTO ===== */
+.ld-room-thumb {
+  position: relative;
+}
+.ld-room-img {
+  object-fit: cover;
+}
+
+/* ===== PROOF STRIP ===== */
+.ld-proof {
+  background: #fff;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  padding: 22px 20px;
+}
+.ld-proof-item {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 6px 28px;
+}
+.ld-proof-item + .ld-proof-item {
+  border-left: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+.ld-proof-num {
+  font-family: var(--font-heading), serif;
+  font-size: 22px;
+  color: var(--pine);
+  white-space: nowrap;
+}
+.ld-proof-label {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.3px;
+}
+
+/* ===== TESTIMONIALS ===== */
+.ld-testimonials {
+  background: var(--cream);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.06);
+}
+.ld-testi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 36px;
+}
+.ld-testi-card {
+  background: #fff;
+  border: 0.5px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 24px;
+  margin: 0;
+  position: relative;
+}
+.ld-testi-mark {
+  font-family: var(--font-heading), serif;
+  font-size: 44px;
+  line-height: 1;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.ld-testi-quote {
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.65;
+  margin: 0 0 16px;
+}
+.ld-testi-who {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.4px;
+}
+.ld-testi-source {
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ===== TOURS ===== */
+.ld-tours {
+  background: #fff;
+}
+.ld-tours-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 36px;
+  max-width: 860px;
+}
+.ld-tour-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--cream);
+  border: 0.5px solid rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  padding: 22px;
+}
+.ld-tour-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  background: rgba(45, 74, 62, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+.ld-tour-name {
+  font-family: var(--font-heading), serif;
+  font-size: 17px;
+  color: var(--pine);
+  margin-bottom: 6px;
+}
+.ld-tour-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* ===== FAQ ===== */
+.ld-faq {
+  background: var(--cream);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.06);
+}
+.ld-faq-list {
+  margin-top: 32px;
+  max-width: 680px;
+}
+.ld-faq-item {
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+.ld-faq-q {
+  cursor: pointer;
+  list-style: none;
+  padding: 18px 32px 18px 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--pine);
+  position: relative;
+  user-select: none;
+}
+.ld-faq-q::-webkit-details-marker {
+  display: none;
+}
+.ld-faq-q::after {
+  content: "+";
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-heading), serif;
+  font-size: 22px;
+  color: var(--gold);
+  transition: transform 0.2s;
+}
+.ld-faq-item[open] .ld-faq-q::after {
+  content: "−";
+}
+.ld-faq-a {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  padding: 0 32px 20px 0;
+}
+
+/* ===== ACCESSIBILITY FLOOR ===== */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ===== HONEYPOT (chống spam bot — ẩn khỏi người thật) ===== */
+.bf-hp {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ===== V2 RESPONSIVE ===== */
+@media (max-width: 640px) {
+  .ld-proof {
+    padding: 14px 12px;
+  }
+  .ld-proof-item {
+    padding: 6px 14px;
+  }
+  .ld-proof-num {
+    font-size: 18px;
+  }
+  .ld-proof-label {
+    font-size: 11px;
+  }
+}
