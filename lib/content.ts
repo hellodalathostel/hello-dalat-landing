@@ -75,8 +75,9 @@ export const TESTIMONIALS: Testimonial[] = [
 ];
 
 // ---------------------------------------------------------------
-// TOURS — đối tác local. Mô tả để chung chung an toàn;
-// Hiếu chỉnh lại chi tiết hoạt động nếu muốn cụ thể hơn.
+// TOURS — đối tác Viet Challenge Tours (Mr. Chung). KHÔNG đặt link
+// ngoài: khách liên hệ hostel để book (quyết định 04/07/2026 —
+// giữ khách trong funnel của hostel).
 // ---------------------------------------------------------------
 export interface Tour {
   icon: string;
@@ -86,31 +87,33 @@ export interface Tour {
 
 export const TOURS: Tour[] = [
   {
-    icon: "🏔️",
-    name: "Viet Challenge Tours",
+    icon: "🧗",
+    name: "Canyoning Đà Lạt",
     desc:
-      "Outdoor adventures around Đà Lạt with Mr. Chung and his team — a partner we've trusted for years. Ask us at the desk and we'll arrange everything.",
+      "Abseil down waterfalls, zipline and cliff-jump through Datanla canyon with Viet Challenge Tours — winner of TripAdvisor's Best of the Best. Ask us at the desk and we'll book it for you.",
   },
   {
-    icon: "🛵",
-    name: "Day trips with Ms. Thu",
+    icon: "🏞️",
+    name: "Top Sights & Waterfalls day tour",
     desc:
-      "Countryside day trips at your own pace — waterfalls, coffee farms, flower fields. Tell us what you'd like to see and we'll set it up.",
+      "One easy, fun day covering Đà Lạt's icons: Datanla waterfall with its alpine coaster, Crazy House, Clay Tunnel, a coffee plantation, and go-kart racing. Message us and we'll arrange everything.",
   },
 ];
 
 // ---------------------------------------------------------------
-// FAQ — các đáp án đánh dấu TODO cần Hiếu xác nhận trước khi deploy.
+// FAQ — đáp án đã được Hiếu xác nhận 04/07/2026.
 // ---------------------------------------------------------------
 export interface Faq {
   q: string;
   a: string;
+  link?: { href: string; label: string }; // link phụ hiển thị sau đáp án
 }
+
+export const GOOGLE_MAPS_URL = "https://maps.app.goo.gl/fKWDDgJ1MxpXrW8eA";
 
 export const FAQS: Faq[] = [
   {
     q: "What time is check-in and check-out?",
-    // TODO(Hiếu): xác nhận giờ chuẩn của hostel
     a: "Check-in from 2:00 PM, check-out by 12:00 PM. Arriving earlier or leaving later? Message us — we'll do our best to accommodate.",
   },
   {
@@ -120,20 +123,18 @@ export const FAQS: Faq[] = [
   {
     q: "Where exactly are you?",
     a: "33/18/2 Phan Đình Phùng, in a quiet lane just off the main street — about 5 minutes on foot to Đà Lạt market and Xuân Hương lake.",
+    link: { href: GOOGLE_MAPS_URL, label: "Open in Google Maps →" },
   },
   {
     q: "Is there parking?",
-    // TODO(Hiếu): xác nhận có chỗ để xe máy / ô tô không
     a: "Motorbike parking is available at the hostel. For cars, ask us in advance and we'll point you to the nearest option.",
   },
   {
     q: "How can I pay?",
-    // TODO(Hiếu): xác nhận phương thức nhận thanh toán
     a: "Cash (VND) or Vietnamese bank transfer at check-in. We'll send payment details when we confirm your booking.",
   },
   {
     q: "What's the cancellation policy?",
-    // TODO(Hiếu): xác nhận policy hủy cho direct booking
     a: "Direct bookings are flexible — just message us before your check-in day and we'll cancel free of charge.",
   },
 ];

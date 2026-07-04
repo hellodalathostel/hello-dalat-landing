@@ -753,3 +753,17 @@ summary:focus-visible {
     font-size: 11px;
   }
 }
+
+/* ===== V2.1 — tour/FAQ links ===== */
+.ld-faq-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--pine);
+  border-bottom: 1px solid var(--gold);
+  transition: color 0.2s;
+}
+.ld-faq-link:hover {
+  color: var(--gold-hover, var(--gold));
+}

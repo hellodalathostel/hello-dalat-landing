@@ -9,6 +9,7 @@ import {
   TESTIMONIALS,
   TOURS,
   FAQS,
+  GOOGLE_MAPS_URL,
 } from "@/lib/content";
 import BookingForm from "@/components/BookingForm";
 import "./page.css";
@@ -236,7 +237,22 @@ export default async function Home() {
           {FAQS.map((f) => (
             <details className="ld-faq-item" key={f.q}>
               <summary className="ld-faq-q">{f.q}</summary>
-              <p className="ld-faq-a">{f.a}</p>
+              <p className="ld-faq-a">
+                {f.a}
+                {f.link && (
+                  <>
+                    {" "}
+                    <a
+                      className="ld-faq-link"
+                      href={f.link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {f.link.label}
+                    </a>
+                  </>
+                )}
+              </p>
             </details>
           ))}
         </div>
@@ -262,6 +278,14 @@ export default async function Home() {
         <div className="ld-contact-links">
           <a href="https://zalo.me/0969975935" className="ld-contact-link zalo">
             Zalo
+          </a>
+          <a
+            href={GOOGLE_MAPS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ld-contact-link"
+          >
+            Map
           </a>
           <a href="tel:+84969975935" className="ld-contact-link">
             Call us
