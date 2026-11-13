@@ -114,12 +114,16 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  justify-content: center;
+  min-height: 48px;
   background: var(--gold);
   color: var(--pine-dark);
   padding: 14px 28px;
   border-radius: 4px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   transition: background 0.2s;
 }
 .ld-hero-cta:hover {
@@ -369,13 +373,16 @@
 }
 .bf-submit {
   width: 100%;
+  min-height: 48px;
   padding: 14px;
   background: var(--gold);
   color: var(--pine-dark);
   border: none;
   border-radius: 4px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   cursor: pointer;
   transition: background 0.2s;
   margin-top: 8px;
@@ -725,7 +732,25 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 summary:focus-visible {
-  outline: 2px solid var(--gold);
+  /* gold trên nền sáng chỉ 2.03:1 → pine-dark (≈ 12:1 trên cream) */
+  outline: 2px solid var(--pine-dark);
+  outline-offset: 2px;
+}
+/* Nền tối (hero, booking, contact, footer): viền focus cream */
+.ld-hero a:focus-visible,
+.ld-booking a:focus-visible,
+.ld-booking button:focus-visible,
+.ld-booking input:focus-visible,
+.ld-booking select:focus-visible,
+.ld-booking textarea:focus-visible,
+.ld-contact a:focus-visible,
+.ld-footer a:focus-visible {
+  outline-color: var(--cream);
+}
+.ld-hero-cta:focus-visible,
+.bf-submit:focus-visible,
+.ld-contact-link:focus-visible {
+  outline: 2px solid var(--cream);
   outline-offset: 2px;
 }
 @media (prefers-reduced-motion: reduce) {
