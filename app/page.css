@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
   padding: 14px 32px;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
 }
@@ -23,7 +24,10 @@
   letter-spacing: 0.3px;
 }
 .ld-nav-wordmark span {
-  color: var(--gold);
+  /* gold-on-cream = 2.05 → chữ pine, gold chỉ làm đường kẻ */
+  color: var(--pine);
+  font-style: italic;
+  border-bottom: 1px solid var(--gold);
 }
 /* Logo: chỉ scale đều, không filter/shadow/crop */
 .ld-nav-badge {
@@ -48,6 +52,7 @@
   color: var(--pine);
 }
 .ld-btn-book {
+  white-space: nowrap;
   background: var(--pine);
   color: var(--cream) !important;
   padding: 8px 20px;
@@ -96,7 +101,7 @@
   font-size: 11px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--cream);
   font-weight: 500;
   margin-bottom: 16px;
 }
@@ -114,8 +119,8 @@
 }
 .ld-hero-sub {
   font-size: 15px;
-  color: rgba(247, 243, 237, 0.65);
-  line-height: 1.6;
+  color: rgba(247, 243, 237, 0.85);
+  line-height: 1.7;
   margin-bottom: 28px;
   font-weight: 300;
 }
@@ -123,12 +128,16 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  justify-content: center;
+  min-height: 48px;
   background: var(--gold);
   color: var(--pine-dark);
   padding: 14px 28px;
   border-radius: 4px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   transition: background 0.2s;
 }
 .ld-hero-cta:hover {
@@ -152,26 +161,29 @@
 .ld-badge-num {
   font-family: var(--font-heading), serif;
   font-size: 20px;
-  color: var(--gold);
+  color: var(--cream);
   display: block;
 }
 .ld-badge-label {
   font-size: 11px;
-  color: rgba(247, 243, 237, 0.55);
+  color: rgba(247, 243, 237, 0.9);
   letter-spacing: 0.5px;
 }
 
 /* ===== SECTION ===== */
 .ld-section {
-  padding: 64px 32px;
+  padding: 80px 32px;
 }
 .ld-section-eyebrow {
   font-size: 11px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 500;
+  color: var(--pine);
+  font-weight: 600;
   margin-bottom: 10px;
+  display: inline-block;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--gold);
 }
 .ld-section-title {
   font-family: var(--font-heading), serif;
@@ -184,7 +196,8 @@
 .ld-section-sub {
   font-size: 14px;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.7;
+  max-width: 620px;
 }
 
 /* ===== ROOMS ===== */
@@ -224,7 +237,7 @@
   font-size: 11px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #888;
+  color: var(--muted);
   font-weight: 500;
   margin-bottom: 4px;
 }
@@ -241,7 +254,7 @@
 }
 .ld-room-meta-item {
   font-size: 12px;
-  color: #888;
+  color: var(--muted);
 }
 .ld-room-price-row {
   display: flex;
@@ -255,7 +268,7 @@
 }
 .ld-room-price-unit {
   font-size: 12px;
-  color: #888;
+  color: var(--muted);
   font-weight: 400;
 }
 .ld-room-book-btn {
@@ -304,7 +317,7 @@
 .ld-why-desc {
   font-size: 13px;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 /* ===== BOOKING ===== */
@@ -312,13 +325,13 @@
   background: var(--pine);
 }
 .ld-booking .ld-section-eyebrow {
-  color: var(--gold);
+  color: var(--cream);
 }
 .ld-booking .ld-section-title {
   color: var(--cream);
 }
 .ld-booking .ld-section-sub {
-  color: rgba(247, 243, 237, 0.6);
+  color: rgba(247, 243, 237, 0.8);
 }
 
 /* ===== BOOKING FORM (component) ===== */
@@ -343,7 +356,7 @@
   display: block;
   font-size: 12px;
   letter-spacing: 0.5px;
-  color: rgba(247, 243, 237, 0.7);
+  color: rgba(247, 243, 237, 0.8);
   margin-bottom: 6px;
   font-weight: 500;
 }
@@ -360,7 +373,7 @@
   transition: border-color 0.2s;
 }
 .bf-input::placeholder {
-  color: rgba(247, 243, 237, 0.3);
+  color: rgba(247, 243, 237, 0.65);
 }
 .bf-input:focus {
   border-color: var(--gold);
@@ -375,13 +388,16 @@
 }
 .bf-submit {
   width: 100%;
+  min-height: 48px;
   padding: 14px;
   background: var(--gold);
   color: var(--pine-dark);
   border: none;
   border-radius: 4px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   cursor: pointer;
   transition: background 0.2s;
   margin-top: 8px;
@@ -397,7 +413,7 @@
 .bf-note {
   text-align: center;
   font-size: 12px;
-  color: rgba(247, 243, 237, 0.4);
+  color: rgba(247, 243, 237, 0.75);
   margin-top: 12px;
 }
 .bf-error {
@@ -431,8 +447,8 @@
 }
 .bf-success-sub {
   font-size: 14px;
-  color: rgba(247, 243, 237, 0.6);
-  line-height: 1.6;
+  color: rgba(247, 243, 237, 0.8);
+  line-height: 1.7;
 }
 
 /* ===== CONTACT ===== */
@@ -496,7 +512,7 @@
 }
 .ld-footer-addr {
   font-size: 12px;
-  color: rgba(247, 243, 237, 0.3);
+  color: rgba(247, 243, 237, 0.65);
 }
 
 /* ===== RESPONSIVE ===== */
@@ -504,11 +520,23 @@
   .ld-nav {
     padding: 12px 20px;
   }
+  .ld-nav-logo {
+    font-size: 16px;
+  }
   .ld-nav-links {
-    gap: 16px;
+    gap: 12px;
+  }
+  .ld-btn-book {
+    padding: 8px 14px;
+  }
+  /* Badge xếp dưới CTA thay vì absolute đè lên nút */
+  .ld-hero {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-end;
   }
   .ld-hero-content {
-    padding: 60px 20px 40px;
+    padding: 60px 20px 24px;
   }
   /* Badge đã chứa tên → ẩn chữ trên mobile để nav không tràn ngang */
   .ld-nav-wordmark {
@@ -518,8 +546,10 @@
     font-size: 34px;
   }
   .ld-hero-badges {
-    right: 20px;
-    bottom: 20px;
+    position: relative;
+    right: auto;
+    bottom: auto;
+    padding: 0 20px 32px;
   }
   .ld-section {
     padding: 48px 20px;
@@ -619,13 +649,13 @@
   font-family: var(--font-heading), serif;
   font-size: 44px;
   line-height: 1;
-  color: var(--gold);
+  color: var(--pine);
   margin-bottom: 4px;
 }
 .ld-testi-quote {
   font-size: 14px;
   color: var(--ink);
-  line-height: 1.65;
+  line-height: 1.7;
   margin: 0 0 16px;
 }
 .ld-testi-who {
@@ -679,7 +709,7 @@
 .ld-tour-desc {
   font-size: 13px;
   color: var(--muted);
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 /* ===== FAQ ===== */
@@ -715,7 +745,7 @@
   transform: translateY(-50%);
   font-family: var(--font-heading), serif;
   font-size: 22px;
-  color: var(--gold);
+  color: var(--pine);
   transition: transform 0.2s;
 }
 .ld-faq-item[open] .ld-faq-q::after {
@@ -735,7 +765,25 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 summary:focus-visible {
-  outline: 2px solid var(--gold);
+  /* gold trên nền sáng chỉ 2.03:1 → pine-dark (≈ 12:1 trên cream) */
+  outline: 2px solid var(--pine-dark);
+  outline-offset: 2px;
+}
+/* Nền tối (hero, booking, contact, footer): viền focus cream */
+.ld-hero a:focus-visible,
+.ld-booking a:focus-visible,
+.ld-booking button:focus-visible,
+.ld-booking input:focus-visible,
+.ld-booking select:focus-visible,
+.ld-booking textarea:focus-visible,
+.ld-contact a:focus-visible,
+.ld-footer a:focus-visible {
+  outline-color: var(--cream);
+}
+.ld-hero-cta:focus-visible,
+.bf-submit:focus-visible,
+.ld-contact-link:focus-visible {
+  outline: 2px solid var(--cream);
   outline-offset: 2px;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -781,5 +829,6 @@ summary:focus-visible {
   transition: color 0.2s;
 }
 .ld-faq-link:hover {
-  color: var(--gold-hover, var(--gold));
+  color: var(--pine-dark);
+  border-bottom-color: var(--pine-dark);
 }
