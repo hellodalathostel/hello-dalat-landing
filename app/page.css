@@ -19,7 +19,10 @@
   letter-spacing: 0.3px;
 }
 .ld-nav-logo span {
-  color: var(--gold);
+  /* gold-on-cream = 2.05 → chữ pine, gold chỉ làm đường kẻ */
+  color: var(--pine);
+  font-style: italic;
+  border-bottom: 1px solid var(--gold);
 }
 .ld-nav-links {
   display: flex;
@@ -84,7 +87,7 @@
   font-size: 11px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--cream);
   font-weight: 500;
   margin-bottom: 16px;
 }
@@ -140,7 +143,7 @@
 .ld-badge-num {
   font-family: var(--font-heading), serif;
   font-size: 20px;
-  color: var(--gold);
+  color: var(--cream);
   display: block;
 }
 .ld-badge-label {
@@ -157,9 +160,12 @@
   font-size: 11px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 500;
+  color: var(--pine);
+  font-weight: 600;
   margin-bottom: 10px;
+  display: inline-block;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--gold);
 }
 .ld-section-title {
   font-family: var(--font-heading), serif;
@@ -212,7 +218,7 @@
   font-size: 11px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #888;
+  color: var(--muted);
   font-weight: 500;
   margin-bottom: 4px;
 }
@@ -229,7 +235,7 @@
 }
 .ld-room-meta-item {
   font-size: 12px;
-  color: #888;
+  color: var(--muted);
 }
 .ld-room-price-row {
   display: flex;
@@ -243,7 +249,7 @@
 }
 .ld-room-price-unit {
   font-size: 12px;
-  color: #888;
+  color: var(--muted);
   font-weight: 400;
 }
 .ld-room-book-btn {
@@ -300,7 +306,7 @@
   background: var(--pine);
 }
 .ld-booking .ld-section-eyebrow {
-  color: var(--gold);
+  color: var(--cream);
 }
 .ld-booking .ld-section-title {
   color: var(--cream);
@@ -603,7 +609,7 @@
   font-family: var(--font-heading), serif;
   font-size: 44px;
   line-height: 1;
-  color: var(--gold);
+  color: var(--pine);
   margin-bottom: 4px;
 }
 .ld-testi-quote {
@@ -699,7 +705,7 @@
   transform: translateY(-50%);
   font-family: var(--font-heading), serif;
   font-size: 22px;
-  color: var(--gold);
+  color: var(--pine);
   transition: transform 0.2s;
 }
 .ld-faq-item[open] .ld-faq-q::after {
@@ -765,5 +771,6 @@ summary:focus-visible {
   transition: color 0.2s;
 }
 .ld-faq-link:hover {
-  color: var(--gold-hover, var(--gold));
+  color: var(--pine-dark);
+  border-bottom-color: var(--pine-dark);
 }
