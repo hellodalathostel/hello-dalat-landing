@@ -12,14 +12,26 @@
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
 }
 .ld-nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
   font-family: var(--font-heading), serif;
   font-size: 18px;
   font-weight: 600;
   color: var(--pine);
   letter-spacing: 0.3px;
 }
-.ld-nav-logo span {
+.ld-nav-wordmark span {
   color: var(--gold);
+}
+/* Logo: chỉ scale đều, không filter/shadow/crop */
+.ld-nav-badge {
+  display: block;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  margin: -4px 0; /* badge 44px cao hơn nút Book now 37px → giữ chiều cao nav cũ */
 }
 .ld-nav-links {
   display: flex;
@@ -79,6 +91,12 @@
   z-index: 2;
   padding: 80px 40px 52px;
   max-width: 600px;
+}
+.ld-hero-logo {
+  display: block;
+  width: 160px;
+  height: auto;
+  margin-bottom: 28px;
 }
 .ld-hero-eyebrow {
   font-size: 11px;
@@ -475,12 +493,12 @@
   gap: 12px;
 }
 .ld-footer-logo {
-  font-family: var(--font-heading), serif;
-  font-size: 15px;
-  color: rgba(247, 243, 237, 0.5);
+  line-height: 0;
 }
-.ld-footer-logo span {
-  color: var(--gold);
+.ld-footer-logo-img {
+  display: block;
+  width: 120px;
+  height: auto;
 }
 .ld-footer-addr {
   font-size: 12px;
@@ -497,6 +515,14 @@
   }
   .ld-hero-content {
     padding: 60px 20px 40px;
+  }
+  /* Badge đã chứa tên → ẩn chữ trên mobile để nav không tràn ngang */
+  .ld-nav-wordmark {
+    display: none;
+  }
+  .ld-hero-logo {
+    width: 120px;
+    margin-bottom: 20px;
   }
   .ld-hero-title {
     font-size: 34px;

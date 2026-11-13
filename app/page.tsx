@@ -30,7 +30,18 @@ export default async function Home() {
       {/* NAV */}
       <nav className="ld-nav">
         <div className="ld-nav-logo">
-          Hello <span>Dalat</span>
+          <Image
+            src="/brand/hello-dalat-badge-light-500.webp"
+            alt="Hello Dalat Hostel"
+            width={500}
+            height={500}
+            sizes="44px"
+            priority
+            className="ld-nav-badge"
+          />
+          <span className="ld-nav-wordmark">
+            Hello <span>Dalat</span>
+          </span>
         </div>
         <div className="ld-nav-links">
           <a href="#rooms">Rooms</a>
@@ -57,6 +68,15 @@ export default async function Home() {
         <div className="ld-hero-mist" />
         <div className="ld-hero-lines" />
         <div className="ld-hero-content">
+          <Image
+            src="/brand/hello-dalat-logo-for-dark-bg-500.webp"
+            alt="Hello Dalat Hostel"
+            width={500}
+            height={519}
+            sizes="(max-width: 640px) 120px, 160px"
+            priority
+            className="ld-hero-logo"
+          />
           <p className="ld-hero-eyebrow">Đà Lạt · Vietnam</p>
           <h1 className="ld-hero-title">
             Wake up to
@@ -296,7 +316,14 @@ export default async function Home() {
       {/* FOOTER */}
       <footer className="ld-footer">
         <div className="ld-footer-logo">
-          Hello <span>Dalat</span> Hostel
+          <Image
+            src="/brand/hello-dalat-logo-for-dark-bg-500.webp"
+            alt="Hello Dalat Hostel"
+            width={500}
+            height={519}
+            sizes="120px"
+            className="ld-footer-logo-img"
+          />
         </div>
         <div className="ld-footer-addr">MST 068060000252 · Hộ Kinh Doanh Chào Đà Lạt</div>
       </footer>
