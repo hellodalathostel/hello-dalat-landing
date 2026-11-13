@@ -68,15 +68,6 @@ export default async function Home() {
         <div className="ld-hero-mist" />
         <div className="ld-hero-lines" />
         <div className="ld-hero-content">
-          <Image
-            src="/brand/hello-dalat-logo-for-dark-bg-500.webp"
-            alt="Hello Dalat Hostel"
-            width={500}
-            height={519}
-            sizes="(max-width: 640px) 120px, 160px"
-            priority
-            className="ld-hero-logo"
-          />
           <p className="ld-hero-eyebrow">Đà Lạt · Vietnam</p>
           <h1 className="ld-hero-title">
             Wake up to

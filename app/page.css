@@ -92,12 +92,6 @@
   padding: 80px 40px 52px;
   max-width: 600px;
 }
-.ld-hero-logo {
-  display: block;
-  width: 160px;
-  height: auto;
-  margin-bottom: 28px;
-}
 .ld-hero-eyebrow {
   font-size: 11px;
   letter-spacing: 2.5px;
@@ -519,10 +513,6 @@
   /* Badge đã chứa tên → ẩn chữ trên mobile để nav không tràn ngang */
   .ld-nav-wordmark {
     display: none;
-  }
-  .ld-hero-logo {
-    width: 120px;
-    margin-bottom: 20px;
   }
   .ld-hero-title {
     font-size: 34px;
