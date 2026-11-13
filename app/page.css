@@ -158,7 +158,7 @@
 
 /* ===== SECTION ===== */
 .ld-section {
-  padding: 64px 32px;
+  padding: 80px 32px;
 }
 .ld-section-eyebrow {
   font-size: 11px;
@@ -182,7 +182,8 @@
 .ld-section-sub {
   font-size: 14px;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.7;
+  max-width: 620px;
 }
 
 /* ===== ROOMS ===== */
@@ -302,7 +303,7 @@
 .ld-why-desc {
   font-size: 13px;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 /* ===== BOOKING ===== */
@@ -433,7 +434,7 @@
 .bf-success-sub {
   font-size: 14px;
   color: rgba(247, 243, 237, 0.8);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 /* ===== CONTACT ===== */
@@ -622,7 +623,7 @@
 .ld-testi-quote {
   font-size: 14px;
   color: var(--ink);
-  line-height: 1.65;
+  line-height: 1.7;
   margin: 0 0 16px;
 }
 .ld-testi-who {
@@ -676,7 +677,7 @@
 .ld-tour-desc {
   font-size: 13px;
   color: var(--muted);
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 /* ===== FAQ ===== */
