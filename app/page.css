@@ -13,6 +13,9 @@
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
 }
 .ld-nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   white-space: nowrap;
   font-family: var(--font-heading), serif;
   font-size: 18px;
@@ -20,11 +23,19 @@
   color: var(--pine);
   letter-spacing: 0.3px;
 }
-.ld-nav-logo span {
+.ld-nav-wordmark span {
   /* gold-on-cream = 2.05 → chữ pine, gold chỉ làm đường kẻ */
   color: var(--pine);
   font-style: italic;
   border-bottom: 1px solid var(--gold);
+}
+/* Logo: chỉ scale đều, không filter/shadow/crop */
+.ld-nav-badge {
+  display: block;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  margin: -4px 0; /* badge 44px cao hơn nút Book now 37px → giữ chiều cao nav cũ */
 }
 .ld-nav-links {
   display: flex;
@@ -492,12 +503,12 @@
   gap: 12px;
 }
 .ld-footer-logo {
-  font-family: var(--font-heading), serif;
-  font-size: 15px;
-  color: rgba(247, 243, 237, 0.5);
+  line-height: 0;
 }
-.ld-footer-logo span {
-  color: var(--gold);
+.ld-footer-logo-img {
+  display: block;
+  width: 120px;
+  height: auto;
 }
 .ld-footer-addr {
   font-size: 12px;
@@ -526,6 +537,10 @@
   }
   .ld-hero-content {
     padding: 60px 20px 24px;
+  }
+  /* Badge đã chứa tên → ẩn chữ trên mobile để nav không tràn ngang */
+  .ld-nav-wordmark {
+    display: none;
   }
   .ld-hero-title {
     font-size: 34px;
