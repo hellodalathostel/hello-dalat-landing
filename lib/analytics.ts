@@ -14,11 +14,21 @@ export type AnalyticsProps = Record<string, string | number | boolean | null | u
 // - chạy ở server (SSR) → bỏ qua
 // - PostHog chưa init (thiếu key, bị DNT, adblock) → bỏ qua
 // - posthog.capture throw → nuốt lỗi, không làm hỏng UI
-export function trackEvent(name: AnalyticsEvent, props?: AnalyticsProps): void {
+// outbound = true: click rời trang (tel:, zalo.me, booking.com) → gửi ngay bằng sendBeacon,
+// không chờ batch, để event không bị mất khi trình duyệt chuyển trang.
+export function trackEvent(
+  name: AnalyticsEvent,
+  props?: AnalyticsProps,
+  options?: { outbound?: boolean }
+): void {
   if (typeof window === "undefined") return;
   try {
     if (!posthog.__loaded) return;
-    posthog.capture(name, props);
+    if (options?.outbound) {
+      posthog.capture(name, props, { send_instantly: true, transport: "sendBeacon" });
+    } else {
+      posthog.capture(name, props);
+    }
   } catch {
     // Analytics lỗi không được ảnh hưởng trải nghiệm khách.
   }

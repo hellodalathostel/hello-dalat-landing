@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { fmtVND, type Room } from "@/lib/rooms";
+import { trackEvent } from "@/lib/analytics";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -64,6 +65,8 @@ export default function BookingForm({ rooms }: BookingFormProps) {
         setStatus("error");
         return;
       }
+      // Chỉ gửi tên form — KHÔNG gửi bất kỳ giá trị field nào (PII)
+      trackEvent("form_submit", { form_name: "booking_request" });
       setStatus("success");
     } catch {
       setErrorMsg("Connection failed. Please call or message us at +84 969 975 935.");

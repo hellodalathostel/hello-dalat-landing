@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import posthog from "posthog-js";
+import AnalyticsClickTracker from "@/components/AnalyticsClickTracker";
 
 const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const POSTHOG_HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com";
@@ -31,5 +32,10 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     initPostHog();
   }, []);
 
-  return <>{children}</>;
+  return (
+    <>
+      <AnalyticsClickTracker />
+      {children}
+    </>
+  );
 }

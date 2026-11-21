@@ -47,7 +47,12 @@ export default async function Home() {
           <a href="#rooms">Rooms</a>
           <a href="#about">About</a>
           <a href="#faq">FAQ</a>
-          <a href="#booking" className="ld-btn-book">
+          <a
+            href="#booking"
+            className="ld-btn-book"
+            data-track="booking_cta_click"
+            data-track-location="nav"
+          >
             Book now
           </a>
         </div>
@@ -80,7 +85,12 @@ export default async function Home() {
             A cozy hostel tucked in the heart of the city — steps from the market, the lake, and the
             best cà phê in town.
           </p>
-          <a href="#booking" className="ld-hero-cta">
+          <a
+            href="#booking"
+            className="ld-hero-cta"
+            data-track="booking_cta_click"
+            data-track-location="hero"
+          >
             Check availability →
           </a>
         </div>
@@ -145,7 +155,13 @@ export default async function Home() {
                     <span className="ld-room-price">{fmtVND(r.price)}</span>
                     <span className="ld-room-price-unit"> ₫ / night</span>
                   </div>
-                  <a href="#booking" className="ld-room-book-btn">
+                  <a
+                    href="#booking"
+                    className="ld-room-book-btn"
+                    data-track="booking_cta_click"
+                    data-track-location="room_card"
+                    data-track-room={r.id}
+                  >
                     Book
                   </a>
                 </div>
@@ -287,7 +303,11 @@ export default async function Home() {
           <span>📞 +84 969 975 935 · hellodalathostel@gmail.com</span>
         </div>
         <div className="ld-contact-links">
-          <a href="https://zalo.me/0969975935" className="ld-contact-link zalo">
+          <a
+            href="https://zalo.me/0969975935"
+            className="ld-contact-link zalo"
+            data-track-location="contact_bar"
+          >
             Zalo
           </a>
           <a
@@ -298,7 +318,7 @@ export default async function Home() {
           >
             Map
           </a>
-          <a href="tel:+84969975935" className="ld-contact-link">
+          <a href="tel:+84969975935" className="ld-contact-link" data-track-location="contact_bar">
             Call us
           </a>
         </div>
